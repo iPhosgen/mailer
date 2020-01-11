@@ -1,0 +1,19 @@
+[Unit]
+Description=Email rendering NodeJS service
+After=network-online.target
+
+[Service]
+Restart=on-failure
+WorkingDirectory=/opt/mailer/
+ExecStart=/usr/bin/node index.js
+CPUAccounting=true
+CPUQuota=10%
+MemoryAccounting=true
+MemoryLimit=250M
+Environment=NODE_ENV=production
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mailer
+
+[Install]
+WantedBy=multi-user.target
