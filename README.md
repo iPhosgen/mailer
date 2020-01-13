@@ -45,23 +45,27 @@ Run it as a microservise and enoy your new great email letters.
     nano /opt/mailer/templates/my_template.mjml
     ```
 
-2. Check MJML [official documentation](https://mjml.io/documentation/), build your own template and put it in or modify existing `base.mjml` temlate
+2. Check MJML [official documentation](https://mjml.io/documentation/), build your own template and put it in or modify existing `test.mjml` temlate
 
     ```xml
-    <mjml>
-        <mj-body>
-            ...
-        </mj-body>
-    </mjml>
+    <mj-wrapper>
+        <mj-section>
+            <mj-column width="100%">
+            <mj-text>{{greeting}}</mj-text>
+            </mj-column>
+        </mj-section>
+    </mj-wrapper>
     ```
 
-3. Add data to your template using the VUeJS [“Mustache” syntax](https://vuejs.org/v2/guide/syntax.html)
+3. Also you can use template inheritance for apply one root template to different content templates, so change `base.mjml` or create your own. After adding custom root template you need to pass its name as a query parameter `service` for example: `http://localhost:3000/render?template=test&service=my-base`
+
+4. Add data to your template using the VUeJS ["Mustache" syntax](https://vuejs.org/v2/guide/syntax.html)
 
     ```xml
     <mj-text>{{myText}}</mj-text>
     ```
 
-4. Also you can use Conditional Rendering and List Rendering:
+5. Also you can use [Conditional Rendering](https://vuejs.org/v2/guide/conditional.html) and [List Rendering](https://vuejs.org/v2/guide/list.html):
 
     ```xml
     <mj-section v-if="showSection">
@@ -79,7 +83,7 @@ Run it as a microservise and enoy your new great email letters.
     </mj-section>
     ```
 
-5. Call `/render` method with POST request and passing template name to query and template data to payload (all data that you send in payload may be available in template)
+6. Call `/render` method with POST request and passing template name to query and template data to payload (all data that you send in payload may be available in template)
 
     ```shell
     curl -X POST -H "Content-Type: application/json" \
@@ -87,7 +91,7 @@ Run it as a microservise and enoy your new great email letters.
     https://localhost:3000/render?template=my_template
     ```
 
-6. Enjoy your beautiful email letter html that compatible with most email clients
+7. Enjoy your beautiful email letter html that compatible with most email clients
 
 ## License
 

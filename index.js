@@ -28,7 +28,7 @@ app.post('/render', (req, res) => {
 
     req.on('end', () => {
         try {
-            renderer.renderLetter(req.query.template, reqData ? JSON.parse(reqData) : {}).then(data => {
+            renderer.renderLetter(req.query.template, req.query.service ? req.query.service : null, reqData ? JSON.parse(reqData) : {}).then(data => {
                 res.send(data);
             }).catch(err => {
                 res.status(500).send(err);
