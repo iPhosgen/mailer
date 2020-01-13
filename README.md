@@ -61,7 +61,25 @@ Run it as a microservise and enoy your new great email letters.
     <mj-text>{{myText}}</mj-text>
     ```
 
-4. Call `/render` method with POST request and passing template name to query and template data to payload (all data that you send in payload may be available in template)
+4. Also you can use Conditional Rendering and List Rendering:
+
+    ```xml
+    <mj-section v-if="showSection">
+        <mj-table>
+            <tr v-for="row in table">
+                <td>{{row.id}}</td>
+            </tr>
+            <tr v-for="row in table">
+                <td>{{row.date}}</td>
+            </tr>
+            <tr v-for="row in table">
+                <td>{{row.message}}</td>
+            </tr>
+        </mj-table>
+    </mj-section>
+    ```
+
+5. Call `/render` method with POST request and passing template name to query and template data to payload (all data that you send in payload may be available in template)
 
     ```shell
     curl -X POST -H "Content-Type: application/json" \
@@ -69,7 +87,7 @@ Run it as a microservise and enoy your new great email letters.
     https://localhost:3000/render?template=my_template
     ```
 
-5. Enjoy your beautiful email letter html that compatible with most email clients
+6. Enjoy your beautiful email letter html that compatible with most email clients
 
 ## License
 
